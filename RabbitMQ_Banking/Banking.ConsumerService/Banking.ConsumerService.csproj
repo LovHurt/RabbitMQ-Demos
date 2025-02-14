@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-Banking.ConsumerService-12bf9d01-ad45-4eed-84b7-7753a098a86c</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.7-develop.2216" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BankingContract\BankingContract.csproj" />
+    </ItemGroup>
+</Project>
