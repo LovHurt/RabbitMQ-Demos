@@ -1,13 +1,20 @@
 const amqplib = require("amqplib");
 
+let connection;
+let channel;
+
 async function createConnection() {
+  if (connection && channel) {
+    return { connection, channel };
+  }
   try {
     const connectionString = "amqp://USERNAME:PASSWORD@localhost:5672/";
-    const connection = await amqplib.connect(connectionString);
-    return connection;
+    connection = await amqplib.connect(connectionString);
+    channel = await connection.createChannel();
+    return { connection, channel };
   } catch (error) {
     console.error(error);
-    return null;
+    return { connection: null, channel: null };
   }
 }
 

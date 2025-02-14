@@ -8,11 +8,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const sendMessage = async (queueName, message) => {
-  const connection = await createConnection();
-  const channel = await connection.createChannel();
 
-  if (!connection) {
-    res.status(500).json({ error: "can not connect rabbitmq server" });
+  const {connection, channel} = await createConnection();
+
+  if (!connection || !channel) {
+    await createConnection();
   }
 
   //durable true means its on the disk not ram

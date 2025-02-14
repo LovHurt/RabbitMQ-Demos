@@ -1,4 +1,5 @@
 //start
+//open dockerdesktop then run that line in cmd:
 //docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-management
 
 

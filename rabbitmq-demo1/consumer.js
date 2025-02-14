@@ -1,11 +1,15 @@
 const createConnection = require("./rabbitMqConnection.js");
 
 const consumer = async (queueName) => {
-  const connection = await createConnection();
-  const channel = await connection.createChannel();
+  const { connection, channel } = await createConnection();
+
+  if (!connection || !channel) {
+    await createConnection();
+  }
 
   await channel.assertQueue(queueName, { durable: true });
 
+  channel.prefetch(52); //limit of messages to be consumed
   await channel.consume(queueName, (msg) => {
     const data = JSON.parse(msg.content.toString());
 
